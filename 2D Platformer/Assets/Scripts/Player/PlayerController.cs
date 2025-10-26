@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb2d;
+    [SerializeField] Animator animator;
 
     [SerializeField] float moveSpeed;
 
@@ -24,6 +25,28 @@ public class PlayerController : MonoBehaviour
 
     private void Movement()
     {
-        rb2d.linearVelocity = new Vector2(moveAction.ReadValue<Vector2>().x * moveSpeed, 0.0f);
+        float horizontalInput = moveAction.ReadValue<Vector2>().x;
+
+        rb2d.linearVelocity = new Vector2(horizontalInput * moveSpeed, 0.0f);
+
+        // Sets walking animation based on movement using bool
+        if (rb2d.linearVelocity.magnitude > 0.0f)
+        {
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
+
+        // Flips sprite based on movement direction
+        if (horizontalInput == 1.0f)
+        {
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+        else if (horizontalInput == -1.0f)
+        {
+            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+        }
     }
 }

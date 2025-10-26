@@ -1421,29 +1421,6 @@ MonoBehaviour:
   m_CropFrameX: 1
   m_CropFrameY: 1
   m_StretchFill: 0
---- !u!1 &670762215 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2994286341884981240, guid: 93364dcfe0135bf4aa4d9cbf0c0bc740, type: 3}
-  m_PrefabInstance: {fileID: 6201510708640677197}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &670762218 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 1857979621920693936, guid: 93364dcfe0135bf4aa4d9cbf0c0bc740, type: 3}
-  m_PrefabInstance: {fileID: 6201510708640677197}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &670762221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 670762215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 038dd47bb3f6127408f505890beb856c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  rb2d: {fileID: 670762218}
 --- !u!1 &737375229
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,6 +1467,33 @@ Transform:
   - {fileID: 1614716198}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1545773869 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2994286341884981240, guid: 93364dcfe0135bf4aa4d9cbf0c0bc740, type: 3}
+  m_PrefabInstance: {fileID: 6201510708640677197}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1545773870
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545773869}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8ff363c160ad19941929748d07bea845, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1614716197
 GameObject:
   m_ObjectHideFlags: 0
@@ -1806,7 +1810,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2994286341884981240, guid: 93364dcfe0135bf4aa4d9cbf0c0bc740, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 670762221}
+      addedObject: {fileID: 1545773870}
   m_SourcePrefab: {fileID: 100100000, guid: 93364dcfe0135bf4aa4d9cbf0c0bc740, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
