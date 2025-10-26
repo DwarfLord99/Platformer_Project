@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private InputAction moveAction;
     private float horizontalInput;
     private bool isGrounded;
+    private bool isJumping = false;
     private Vector2 slopeNormal = Vector2.up; // current smoothed normal
 
     // --- Optional debug visualization ---
@@ -106,25 +107,31 @@ public class PlayerController : MonoBehaviour
         Vector2 velocity = rb2d.linearVelocity;
         velocity.x = horizontalInput * adjustedSpeed;
 
-        // --- 6. Slope sticking & projected gravity ---
-        if (isGrounded)
+        // --- 6. Unified gravity application ---
+        Vector2 gravity = Physics2D.gravity * rb2d.gravityScale;
+        Vector2 appliedGravity = gravity;
+
+        if (isGrounded && !isJumping)
         {
-            // Project gravity so it acts parallel to the slope
-            projectedGravity = Physics2D.gravity;
+            // Project gravity along slope
             projectedGravity -= Vector2.Dot(projectedGravity, slopeNormal) * slopeNormal;
 
-            rb2d.AddForce(projectedGravity * rb2d.gravityScale, ForceMode2D.Force);
-
-            // Apply "press down" to maintain contact
-            pressDownForce = -slopeNormal * slopeStickStrength;
-            rb2d.AddForce(pressDownForce, ForceMode2D.Force);
-
-            // Smooth stop on slope when no input
-            if (Mathf.Abs(horizontalInput) < 0.01f)
-                velocity.x = Mathf.Lerp(velocity.x, 0f, 0.2f);
+            // Optional: add press-down force if needed
+            appliedGravity += -slopeNormal * slopeStickStrength;
         }
 
+        // Apply gravity force
+        rb2d.AddForce(appliedGravity, ForceMode2D.Force);
+
+        // Smooth stop on slope when no input
+        if (isGrounded && Mathf.Abs(horizontalInput) < 0.01f)
+            velocity.x = Mathf.Lerp(velocity.x, 0f, 0.2f);
+
         rb2d.linearVelocity = velocity;
+
+        // Debug vectors
+        projectedGravity = appliedGravity;
+        pressDownForce = isGrounded ? -slopeNormal * slopeStickStrength : Vector2.zero;
     }
 
     private void HandleAnimation()
